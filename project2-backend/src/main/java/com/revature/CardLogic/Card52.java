@@ -9,7 +9,7 @@ public class Card52 implements Comparable<Card52> {
 
     public Card52(Suit suit, Rank rank){
         if (suit == null || rank == null) {
-            throw new NullPointerException("Both suit and rnak must be defined.");
+            throw new NullPointerException("Both suit and rank must be defined.");
         }
         this.suit = suit;
         this.rank = rank;

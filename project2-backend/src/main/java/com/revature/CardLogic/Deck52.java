@@ -15,6 +15,9 @@ public class Deck52 {
 		}
     }
 
+    //Shuffles all of the cards in the deck.
+    //This returns this Deck52 instance so that a deck instance can be created with this logic: 
+    // Deck52 deck = new Deck52().shuffle();
     public Deck52 shuffle(){
         Collections.shuffle(deck);
         return this;
@@ -33,13 +36,30 @@ public class Deck52 {
     //Show the next card in the deck without removing it. 
     public Card52 peek() throws IndexOutOfBoundsException {
         if(deck.size() == 0) throw new IndexOutOfBoundsException("There are no more cards left to take.");
-        return deck.get(0);
+        return deck.get(deck.size() - 1); //Index is chosen to avoid many index reassignments each time a card is taken
     }
 
     //Remove the next card from the deck and return it.
-    public Card52 pop() throws IndexOutOfBoundsException {
+    public Card52 deal() throws IndexOutOfBoundsException {
         if(deck.size() == 0) throw new IndexOutOfBoundsException("There are no more cards left to take.");
-        return deck.remove(0);
+        return deck.remove(deck.size() - 1); //Index is chosen to avoid many index reassignments each time a card is taken
+    }
+
+    /**
+     * Allows you to deal a set number of cards from the deck at once.
+     * @param number The number of cards to deal
+     * @return a List containing the cards that were dealt
+     * @throws IndexOutOfBoundsException If the number of cards to deal is larger than the amount left in the deck.
+     */
+    public List<Card52> deal(int number) throws IndexOutOfBoundsException {
+        if(number > deck.size()) throw new IndexOutOfBoundsException("There aren't enough cards left to deal " + number + '!');
+        List<Card52> result = new ArrayList<>();
+        
+        for(int i = 0; i < number; i++) {
+            result.add(deck.remove(deck.size() - 1));
+        }
+
+        return result;
     }
 
 
